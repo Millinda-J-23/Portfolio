@@ -233,6 +233,17 @@
                 </a>
 
 
+                <a href="https://millinda-j-23.github.io/Resume/Resume/index"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="btn btn-secondary">
+
+                    <i class="fa-solid fa-file-pdf"></i>
+
+                    View Resume
+
+                </a>
+
 
                 <a href="https://millinda-j-23.github.io/Resume/Resume/index"
                    target="_blank"
@@ -1287,8 +1298,8 @@
 
                 <h2>
 
-                    Learning beyond
-                    <em>the classroom.</em>
+                    Building my
+                    <em>expertise.</em>
 
                 </h2>
 
@@ -1301,46 +1312,82 @@
 
         <div class="certifications-grid">
 
-
-            <!-- CERTIFICATE -->
-
             <div class="certificate-card">
 
-
                 <div class="certificate-icon">
-
                     <i class="fa-solid fa-certificate"></i>
-
                 </div>
-
 
                 <div>
-
                     <h3>
-
                         Cyber Security and Privacy
-
                     </h3>
 
-
                     <p>
-
                         NPTEL
-
                     </p>
-
-
                 </div>
 
-
             </div>
-
 
         </div>
 
     </div>
 
-</section>  
+</section>
+
+
+
+<!-- =========================================================
+     RESUME CTA
+========================================================= -->
+
+<section class="resume-cta">
+
+
+    <div class="container">
+
+
+        <div>
+
+
+            <p>
+
+                WANT TO KNOW MORE?
+
+            </p>
+
+
+            <h2>
+
+                View my complete resume.
+
+            </h2>
+
+
+        </div>
+
+
+        <div class="hero-buttons">
+
+
+            <a href="https://millinda-j-23.github.io/Resume/Resume/index"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-secondary">
+                <i class="fa-solid fa-file-pdf"></i>
+                    View Resume
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
 
 <!-- =========================================================
      CONTACT
@@ -1488,7 +1535,9 @@
             <!-- CONTACT FORM -->
 
             <form class="contact-form"
-                  id="contactForm">
+                  id="contactForm"
+                  action="https://formspree.io/f/YOUR_FORM_ID"
+                  method="POST">
 
 
                 <div class="form-row">
@@ -1561,19 +1610,27 @@
 
 
 
+                <input type="hidden"
+                       name="_subject"
+                       value="New Portfolio Contact Message">
+
+
                 <button type="submit"
-                        class="btn submit-btn">
+                        class="btn submit-btn"
+                        id="submitBtn">
 
 
                     <i class="fa-solid fa-paper-plane"></i>
 
-                    Send Message
+                    <span>Send Message</span>
 
 
                 </button>
 
 
-                <p id="formMessage"></p>
+                <p id="formMessage"
+                   class="form-message"
+                   aria-live="polite"></p>
 
 
             </form>

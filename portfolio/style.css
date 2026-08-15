@@ -2154,3 +2154,90 @@ body.dark-mode .form-message {
 .hero-content h2 span {
     color: #888888;
 }
+/* =========================================================
+   MOBILE THEME BUTTON
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .header {
+        position: relative;
+    }
+
+    .theme-btn {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 0;
+        margin: 0;
+
+        border-radius: 50%;
+
+        font-size: 15px;
+
+        background: transparent;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+
+        cursor: pointer;
+
+        transition:
+            background 0.25s ease,
+            border-color 0.25s ease,
+            transform 0.25s ease;
+    }
+
+    .theme-btn:hover {
+        transform: scale(1.05);
+    }
+
+    .theme-btn i {
+        margin: 0;
+    }
+
+
+    /* Dark mode */
+
+    body.dark-mode .theme-btn {
+        border-color: rgba(255, 255, 255, 0.18);
+    }
+
+
+    /* Mobile header layout */
+
+    .header-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+
+    .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+
+    /* Menu button */
+
+    .menu-btn {
+        width: 38px;
+        height: 38px;
+        min-width: 38px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 0;
+
+        border-radius: 50%;
+    }
+
+}
