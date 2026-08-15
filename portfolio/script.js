@@ -31,6 +31,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
 
+        /* Close mobile menu after clicking a link */
+
         navLinks.querySelectorAll("a").forEach(function (link) {
 
             link.addEventListener("click", function () {
@@ -62,6 +64,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const savedTheme = localStorage.getItem("theme");
 
+
+        /* Load saved theme */
+
         if (savedTheme === "dark") {
 
             document.body.classList.add("dark-mode");
@@ -72,14 +77,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
+        /* Change theme */
+
         themeBtn.addEventListener("click", function () {
 
             document.body.classList.toggle("dark-mode");
 
 
-            if (
-                document.body.classList.contains("dark-mode")
-            ) {
+            if (document.body.classList.contains("dark-mode")) {
 
                 localStorage.setItem("theme", "dark");
 
@@ -129,7 +134,6 @@ document.addEventListener("DOMContentLoaded", function () {
             window.scrollTo({
 
                 top: 0,
-
                 behavior: "smooth"
 
             });
@@ -145,6 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ===================================================== */
 
     const revealElements = document.querySelectorAll(
+
         ".section-heading, " +
         ".skill-card, " +
         ".project-card, " +
@@ -152,6 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ".education-card, " +
         ".certificate-card, " +
         ".contact-grid"
+
     );
 
 
@@ -247,7 +253,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* =====================================================
        CONTACT FORM
-       FORMSPREE
+       OPEN EMAIL APPLICATION
     ===================================================== */
 
     const contactForm =
@@ -256,18 +262,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const formMessage =
         document.getElementById("formMessage");
 
-    const submitBtn =
-        document.getElementById("submitBtn");
-
 
     if (contactForm) {
 
         contactForm.addEventListener(
             "submit",
-            async function (event) {
+            function (event) {
 
                 event.preventDefault();
 
+
+                /* =========================
+                   GET FORM VALUES
+                ========================= */
 
                 const name =
                     document.getElementById("name");
@@ -279,14 +286,24 @@ document.addEventListener("DOMContentLoaded", function () {
                     document.getElementById("message");
 
 
+                const nameValue =
+                    name.value.trim();
+
+                const emailValue =
+                    email.value.trim();
+
+                const messageValue =
+                    message.value.trim();
+
+
                 /* =========================
                    VALIDATION
                 ========================= */
 
                 if (
-                    !name.value.trim() ||
-                    !email.value.trim() ||
-                    !message.value.trim()
+                    !nameValue ||
+                    !emailValue ||
+                    !messageValue
                 ) {
 
                     formMessage.textContent =
@@ -308,7 +325,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
-                if (!emailPattern.test(email.value.trim())) {
+                if (
+                    !emailPattern.test(emailValue)
+                ) {
 
                     formMessage.textContent =
                         "Please enter a valid email address.";
@@ -322,119 +341,63 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 /* =========================
-                   LOADING STATE
+                   CREATE EMAIL SUBJECT
                 ========================= */
 
-                const originalButton =
-                    submitBtn.innerHTML;
-
-
-                submitBtn.disabled = true;
-
-
-                submitBtn.innerHTML = `
-                    <i class="fa-solid fa-spinner fa-spin"></i>
-                    Sending...
-                `;
-
-
-                formMessage.textContent = "";
-
-                formMessage.className =
-                    "form-message";
-
-
-                try {
-
-
-                    /* =========================
-                       SEND TO FORMSPREE
-                    ========================= */
-
-                    const formData =
-                        new FormData(contactForm);
-
-
-                    const response =
-                        await fetch(
-                            contactForm.action,
-                            {
-                                method: "POST",
-
-                                body: formData,
-
-                                headers: {
-                                    "Accept":
-                                        "application/json"
-                                }
-                            }
-                        );
-
-
-                    /* =========================
-                       SUCCESS
-                    ========================= */
-
-                    if (response.ok) {
-
-                        formMessage.textContent =
-                            "Message sent successfully! Thank you for contacting me.";
-
-                        formMessage.className =
-                            "form-message success";
-
-
-                        contactForm.reset();
-
-                    }
-
-
-                    /* =========================
-                       ERROR
-                    ========================= */
-
-                    else {
-
-                        formMessage.textContent =
-                            "Unable to send your message. Please try again.";
-
-                        formMessage.className =
-                            "form-message error";
-
-                    }
-
-
-                }
-
-
-                /* =========================
-                   NETWORK ERROR
-                ========================= */
-
-                catch (error) {
-
-                    formMessage.textContent =
-                        "Something went wrong. Please try again later.";
-
-                    formMessage.className =
-                        "form-message error";
-
-                    console.error(
-                        "Contact form error:",
-                        error
+                const subject =
+                    encodeURIComponent(
+                        "Portfolio Contact Message"
                     );
 
-                }
+
+                /* =========================
+                   CREATE EMAIL BODY
+                ========================= */
+
+                const body =
+                    encodeURIComponent(
+
+                        "Hello Millinda,\n\n" +
+
+                        "Name: " +
+                        nameValue +
+                        "\n" +
+
+                        "Email: " +
+                        emailValue +
+                        "\n\n" +
+
+                        "Message:\n" +
+                        messageValue +
+
+                        "\n\n" +
+
+                        "Sent from Millinda J Portfolio"
+
+                    );
 
 
                 /* =========================
-                   RESTORE BUTTON
+                   OPEN EMAIL APPLICATION
                 ========================= */
 
-                submitBtn.disabled = false;
+                window.location.href =
+                    "mailto:millinjas6@gmail.com" +
+                    "?subject=" +
+                    subject +
+                    "&body=" +
+                    body;
 
-                submitBtn.innerHTML =
-                    originalButton;
+
+                /* =========================
+                   SHOW MESSAGE
+                ========================= */
+
+                formMessage.textContent =
+                    "Opening your email application...";
+
+                formMessage.className =
+                    "form-message success";
 
             }
         );
@@ -498,7 +461,6 @@ document.addEventListener("DOMContentLoaded", function () {
                         window.scrollTo({
 
                             top: position,
-
                             behavior: "smooth"
 
                         });
@@ -523,6 +485,8 @@ document.addEventListener("DOMContentLoaded", function () {
             if (event.key === "Escape") {
 
 
+                /* Close mobile menu */
+
                 if (navLinks) {
 
                     navLinks.classList.remove("active");
@@ -530,20 +494,25 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
 
+                /* Reset menu icon */
+
                 if (menuBtn) {
 
                     const icon =
                         menuBtn.querySelector("i");
 
 
-                    icon.classList.remove(
-                        "fa-xmark"
-                    );
+                    if (icon) {
 
+                        icon.classList.remove(
+                            "fa-xmark"
+                        );
 
-                    icon.classList.add(
-                        "fa-bars"
-                    );
+                        icon.classList.add(
+                            "fa-bars"
+                        );
+
+                    }
 
                 }
 
